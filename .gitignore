@@ -1,4 +1,9 @@
+.vscode
+*.code-workspace
 venv
+*,cover
+coverage.xml
+.coverage
 .scannerwork
 .pytest_cache
 *.pyc
@@ -8,3 +13,5 @@ build
 dist
 example/tf_files/*
 terraform_compliance.egg-info
+
+.DS_Store

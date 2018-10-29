@@ -1,3 +1,6 @@
+from terraform_validate.terraform_validate import TerraformSyntaxException
+from os.path import exists
+from os import remove, environ
 
 
 class MockedData(object):
@@ -219,5 +222,33 @@ class MockedData(object):
         }
     }
 
-    # check_port_cidr_ranges() tests
-    plain_security_group = ''
+    # security_groups
+    sg_ssh_with_2_cidrs = {u'to_port': 22, u'cidr_blocks': [u'213.86.221.35/32', u'195.99.231.117/32'], u'from_port': 22, u'protocol': u'tcp'}
+    sg_ssh_with_2_cidrs_any_proto = {u'to_port': 22, u'cidr_blocks': [u'213.86.221.35/32', u'195.99.231.117/32'], u'from_port': 22, u'protocol': u'-1'}
+    sg_ssh_with_all_ips = {u'to_port': 22, u'cidr_blocks': [u'0.0.0.0/0'], u'from_port': 22, u'protocol': u'tcp'}
+    sg_all_port_all_ip = {u'to_port': 0, u'cidr_blocks': [u'0.0.0.0/0'], u'from_port': 0, u'protocol': u'tcp'}
+    sg_all_port_no_ip = {}
+    sg_invalid = {u'to_port': 1, u'from_port': 2}
+
+
+    # refined sg_params
+    sg_params_ssh_with_2_cidrs = dict(protocol=['tcp'], from_port=22, to_port=22, cidr_blocks=['213.86.221.35/32', '195.99.231.117/32'])
+    sg_params_ssh_with_2_cidrs_any_proto = dict(protocol=['tcp', 'udp'], from_port=22, to_port=22, cidr_blocks=['213.86.221.35/32', '195.99.231.117/32'])
+    sg_params_all_port_all_ip = dict(protocol=['tcp'], from_port=0, to_port=65535, cidr_blocks=['0.0.0.0/0'])
+    sg_params_all_port_no_ip = dict(protocol=['tcp', 'udp'], from_port=0, to_port=65535, cidr_blocks=[])
+
+
+class MockedValidator(object):
+    def __init__(self, directory):
+        global state_file
+
+        if directory == 'valueerror':
+            raise ValueError('detailed message')
+        elif directory == 'syntaxexception':
+            state_key = 'MockedValidator.state'
+            state = environ.get(state_key, None)
+            if state:
+                pass
+            else:
+                environ[state_key] = '1'
+                raise TerraformSyntaxException('detailed message')

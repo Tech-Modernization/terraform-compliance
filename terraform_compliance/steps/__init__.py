@@ -16,7 +16,14 @@ untaggable_resources = [
     "aws_server_certificate",
     "aws_route53_record",
     "aws_directory_service_directory",
-    "azurerm_resource_group"
+    "azurerm_resource_group",
+    "aws_efs_mount_target",
+    "aws_ecs_cluster",
+    "aws_launch_configuration",
+    "aws_kms_alias",
+    "aws_kinesis_firehose_delivery_stream",
+    "aws_vpc_dhcp_options_association",
+    "null_resource"
 ]
 
 encryption_property = {
@@ -28,13 +35,18 @@ encryption_property = {
 }
 
 resource_name = {
-    "AWS RDS instance": "aws_db_instance",
-    "AWS EC2 instance": "aws_instance",
+    "AWS Auto-Scaling Group": "aws_autoscaling_group",
     "AWS EBS volume": "aws_ebs_volume",
+    "AWS EC2 instance": "aws_instance",
+    "AWS EFS file system": "aws_efs_file_system",
+    "AWS ELB resource": "aws_elb",
+    "AWS Launch Configuration": "aws_launch_configuration",
+    "AWS RDS instance": "aws_db_instance",
+    "AWS S3 Bucket": "aws_s3_bucket",
     "AWS Security Group": "aws_security_group",
-    "AWS Subnet": "aws_subnet",
-    "Azure Storage Account": "azurerm_storage_account",
     "Azure SQL Database": "azurerm_sql_database",
+    "Azure Storage Account": "azurerm_storage_account",
+    "AWS Subnet": "aws_subnet",
     "resource that supports tags": "(?!{0}).*".format("|".join(untaggable_resources))
 }
 
