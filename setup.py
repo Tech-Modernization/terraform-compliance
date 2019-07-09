@@ -8,9 +8,10 @@ import radish
 dependencies = [
     'radish',
     'radish-bdd',
-    'terraform-validate',
     'gitpython',
-    'netaddr'
+    'netaddr',
+    'colorful',
+    'filetype'
 ]
 
 setup(
@@ -42,7 +43,14 @@ setup(
         'Operating System :: Unix',
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.0',
+        'Programming Language :: Python :: 3.1',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ]
 )

@@ -5,15 +5,15 @@ Feature: Resources should have a proper naming standard
 
   Scenario Outline: Naming Standard on all available resources
     Given I have <resource_name> defined
-    Then it should contain <name_key>
-    And its value must match the "\${var.project}-\${var.environment}-\${var.application}-.*" regex
+    When it contains <name_key>
+    Then its value must match the "\${var.project}-\${var.environment}-\${var.application}-.*" regex
 
     Examples:
     | resource_name           | name_key |
     | AWS EC2 instance        | name     |
     | AWS ELB resource        | name     |
     | AWS RDS instance        | name     |
-    | AWS S3 Bucket           | name     |
+    | AWS S3 Bucket           | bucket   |
     | AWS EBS volume          | name     |
     | AWS Auto-Scaling Group  | name     |
     | aws_key_pair            | key_name |
